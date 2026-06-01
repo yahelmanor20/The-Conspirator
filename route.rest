@@ -42,3 +42,6 @@ Content-Type: application/json
 
 ### Get all sorted by date
 GET http://localhost:3000/conspiracys?sort=likes
+
+### 
+POST http://localhost:3000/conspiracys/generate

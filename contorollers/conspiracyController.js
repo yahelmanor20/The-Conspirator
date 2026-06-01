@@ -1,6 +1,8 @@
 const express = require('express')
 //const router = express.Router();
 const Conspiracy = require('../models/conspiracy')
+const generateConspiracy = require("../services/conspiracyGenerator");
+
 
 async function getConspiracy(req, res, next) {
     let conspiracy;
@@ -88,21 +90,13 @@ const addComment = async(req, res) => {
     res.status(400).json({message:error.message})
   }
 }
-// const generateConspiracy = async(req, res)=>{
-//     console.log("HI")
-//     const conspiracy  = new Conspiracy({
-//     text: req.body.text,
-//     likes: req.body.likes
-//     });
-//     try {generateConspiracy
-//         const newConspiracy = await conspiracy.save();
-//         res.status(201).json(newConspiracy);
-        
-//     } catch (error) {
-//         console.error(error)
-//         res.status(400).json({message: error.message})
-//     }
-// }
+const generateConspiracyController = async (req, res) => {
+  const text = generateConspiracy();
+
+  res.status(201).json({
+    conspiracy: text,
+  });
+};
 const updateConspiracy = async(req, res) =>{
   if (req.body.text != null) {
     res.conspiracy.text = req.body.text
@@ -143,5 +137,5 @@ module.exports = {getConspiracy,
                 likeConspiracy,
                 disLikeConspiracy,
                 addComment,
-                //generateConspiracy,
+                generateConspiracyController,
 };

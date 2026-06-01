@@ -20,7 +20,7 @@ router.post("/:id/dislike", Contoroller.getConspiracy, Contoroller.disLikeConspi
 router.post("/:id/comment", Contoroller.getConspiracy, Contoroller.addComment);
 
 //generate Conspiracy
-//router.post("/generate", Contoroller.generateConspiracy);
+router.post("/generate", Contoroller.generateConspiracyController);
 
 //update one
 router.patch('/:id',Contoroller.getConspiracy, Contoroller.updateConspiracy);
