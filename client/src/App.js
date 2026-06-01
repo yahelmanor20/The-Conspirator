@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
 
 function App() {
+  const [conspiracies, setConspiracies] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/conspiracies")
+      .then((response) => response.json())
+      .then((data) => setConspiracies(data))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>המערכת הקונספירטור</h1>
+
+      {conspiracies.map((conspiracy) => (
+        <div key={conspiracy._id}>
+          <h3>{conspiracy.text}</h3>
+
+          <p>
+            👍 {conspiracy.likes} | 👎 {conspiracy.disLikes}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
