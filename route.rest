@@ -1,0 +1,41 @@
+GET http://localhost:3000/conspiracys
+
+###
+
+GET http://localhost:3000/conspiracys/6a1c879527c3fb3aadabc114
+
+###
+POST http://localhost:3000/conspiracys
+Content-Type: application/json
+
+{
+    "text":"cosnpiracy",
+    "likes":10
+}
+
+###
+DELETE http://localhost:3000/conspiracys/6a1c879527c3fb3aadabc114
+
+###
+PATCH http://localhost:3000/conspiracys/6a1c88af206015279f313410
+Content-Type: application/json
+
+{
+    "text":"new cosnpiracy",
+    "likes":12
+}
+
+###
+POST http://localhost:3000/conspiracys/6a1c88af206015279f313410/like
+
+###
+POST http://localhost:3000/conspiracys/6a1c88af206015279f313410/disLike
+
+###
+POST http://localhost:3000/conspiracys/6a1c88af206015279f313410/comment
+Content-Type: application/json
+
+{
+    "text":"new comment",
+    "author": yahel
+}

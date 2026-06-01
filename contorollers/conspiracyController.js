@@ -1,0 +1,118 @@
+const express = require('express')
+//const router = express.Router();
+const Conspiracy = require('../models/conspiracy')
+
+async function getConspiracy(req, res, next) {
+    let conspiracy;
+    try {
+        conspiracy = await Conspiracy.findById(req.params.id)
+        if (conspiracy == null) {
+            return res.status(404).json({message:"can't find conpiracy"})
+        }
+    } catch (error) {
+        return res.status(500).json({message:error})
+    }
+    res.conspiracy = conspiracy;
+    next()
+}
+const getAllConspiracies = async (req, res) => {
+    try {
+        const conspiracys = await Conspiracy.find()
+        console.log(conspiracys);
+        res.json(conspiracys);
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({message: error.message})
+    }
+}
+const getConspiracyById = async(req, res)=>{
+    try {
+        const conspiracy = res.conspiracy;
+        res.json(conspiracy)
+    } catch (error) {
+        res.status(400).json({message:error.message})
+    }
+}
+const createNewConspiracy = async(req, res)=>{
+    console.log("HI")
+    const conspiracy  = new Conspiracy({
+    text: req.body.text,
+    likes: req.body.likes
+    });
+    try {
+        const newConspiracy = await conspiracy.save();
+        res.status(201).json(newConspiracy);
+        
+    } catch (error) {
+        console.error(error)
+        res.status(400).json({message: error.message})
+    }
+}
+const updateConspiracy = async(req, res) =>{
+  if (req.body.text != null) {
+    res.conspiracy.text = req.body.text
+  }
+  if (req.body.likes != null) {
+    res.conspiracy.likes = req.body.likes
+  }
+  
+  try {
+    const updatedConspiracy = await res.conspiracy.save();
+    res.json(updatedConspiracy)
+  } catch (error) {
+    res.status(400).json({message:error.message})
+  }
+}
+const likeConspiracy = async(req, res) =>{
+   res.conspiracy.likes += 1;
+  try {
+    const updatedConspiracy = await res.conspiracy.save();
+    res.json(updatedConspiracy)
+  } catch (error) {
+    res.status(400).json({message:error.message})
+  }
+}
+const disLikeConspiracy = async(req, res) =>{
+   res.conspiracy.disLikes += 1;
+  try {
+    const updatedConspiracy = await res.conspiracy.save();
+    res.json(updatedConspiracy)
+  } catch (error) {
+    res.status(400).json({message:error.message})
+  }
+}
+const addComment = async(req, res) => {
+  if (!req.body.text) {
+    return res.status(400).json({ message: 'Comment text is required' })
+  }
+  res.conspiracy.comments.push({
+    author: req.body.author || 'Anonymous',
+    text: req.body.text
+  })
+  try {
+    const updatedConspiracy = await res.conspiracy.save();
+    res.status(201).json(updatedConspiracy)
+  } catch (error) {
+    res.status(400).json({message:error.message})
+  }
+}
+const deleteConspiracy = async(req, res)=>{
+    try {
+        await res.conspiracy.deleteOne();
+        res.json({message:"User Deleted"})
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+
+}
+
+module.exports = {getConspiracy, 
+                getAllConspiracies,
+                getConspiracyById,
+                createNewConspiracy,
+                updateConspiracy,
+                deleteConspiracy,
+                likeConspiracy,
+                disLikeConspiracy,
+                addComment
+};
