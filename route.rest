@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/conspiracys/6a1c88af206015279f313410/like
+POST http://localhost:3000/conspiracys/6a1d32e8579ab374642c59eb/like
 
 ###
 POST http://localhost:3000/conspiracys/6a1c88af206015279f313410/disLike
@@ -37,5 +37,8 @@ Content-Type: application/json
 
 {
     "text":"new comment",
-    "author": yahel
+    "author": "yahel"
 }
+
+### Get all sorted by date
+GET http://localhost:3000/conspiracys?sort=likes

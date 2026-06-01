@@ -5,7 +5,6 @@ const Contoroller = require('../contorollers/conspiracyController')
 
 module.exports = router
 //get all
-
 router.get('/', Contoroller.getAllConspiracies);
 //get one by id
 router.get('/:id', Contoroller.getConspiracy, Contoroller.getConspiracyById);
@@ -19,6 +18,9 @@ router.post("/:id/dislike", Contoroller.getConspiracy, Contoroller.disLikeConspi
 
 //create comment
 router.post("/:id/comment", Contoroller.getConspiracy, Contoroller.addComment);
+
+//generate Conspiracy
+//router.post("/generate", Contoroller.generateConspiracy);
 
 //update one
 router.patch('/:id',Contoroller.getConspiracy, Contoroller.updateConspiracy);

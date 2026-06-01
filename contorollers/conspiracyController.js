@@ -17,8 +17,15 @@ async function getConspiracy(req, res, next) {
 }
 const getAllConspiracies = async (req, res) => {
     try {
-        const conspiracys = await Conspiracy.find()
-        console.log(conspiracys);
+        let query = Conspiracy.find();
+
+        if (req.query.sort === 'date') {
+            query = query.sort({ createAT: -1 });
+        } else if (req.query.sort === 'likes') {
+            query = query.sort({ likes: -1 });
+        }
+
+        const conspiracys = await query;
         res.json(conspiracys);
     } catch (error) {
         console.error(error)
@@ -47,21 +54,6 @@ const createNewConspiracy = async(req, res)=>{
         console.error(error)
         res.status(400).json({message: error.message})
     }
-}
-const updateConspiracy = async(req, res) =>{
-  if (req.body.text != null) {
-    res.conspiracy.text = req.body.text
-  }
-  if (req.body.likes != null) {
-    res.conspiracy.likes = req.body.likes
-  }
-  
-  try {
-    const updatedConspiracy = await res.conspiracy.save();
-    res.json(updatedConspiracy)
-  } catch (error) {
-    res.status(400).json({message:error.message})
-  }
 }
 const likeConspiracy = async(req, res) =>{
    res.conspiracy.likes += 1;
@@ -96,6 +88,42 @@ const addComment = async(req, res) => {
     res.status(400).json({message:error.message})
   }
 }
+// const generateConspiracy = async(req, res)=>{
+//     console.log("HI")
+//     const conspiracy  = new Conspiracy({
+//     text: req.body.text,
+//     likes: req.body.likes
+//     });
+//     try {generateConspiracy
+//         const newConspiracy = await conspiracy.save();
+//         res.status(201).json(newConspiracy);
+        
+//     } catch (error) {
+//         console.error(error)
+//         res.status(400).json({message: error.message})
+//     }
+// }
+const updateConspiracy = async(req, res) =>{
+  if (req.body.text != null) {
+    res.conspiracy.text = req.body.text
+  }
+  if (req.body.likes != null) {
+    res.conspiracy.likes = req.body.likes
+  }
+  if (req.body.disLikes != null) {
+    res.conspiracy.likes = req.body.likes
+  }
+  if (req.body.comments != null) {
+    res.conspiracy.likes = req.body.likes
+  }
+  
+  try {
+    const updatedConspiracy = await res.conspiracy.save();
+    res.json(updatedConspiracy)
+  } catch (error) {
+    res.status(400).json({message:error.message})
+  }
+}
 const deleteConspiracy = async(req, res)=>{
     try {
         await res.conspiracy.deleteOne();
@@ -114,5 +142,6 @@ module.exports = {getConspiracy,
                 deleteConspiracy,
                 likeConspiracy,
                 disLikeConspiracy,
-                addComment
+                addComment,
+                //generateConspiracy,
 };
