@@ -3,7 +3,11 @@ import { useState } from "react";
 function CreateConspiracyForm({ onConspiracyCreated }) {
     const [name, setName] = useState("");
     const handleSubmit = async () => {
-    try {
+      try {
+        if (!name.trim()) {
+          alert("אנא הזן קונספירציה לפני הפרסום.");
+          return;
+        }
         const response = await fetch(
         "http://localhost:5000/conspiracies",
         {
@@ -22,35 +26,42 @@ function CreateConspiracyForm({ onConspiracyCreated }) {
         await onConspiracyCreated();
         console.log(data);
         
-    } catch (error) { 
+      } catch (error) { 
         console.error(error);
     }
-}
-
+    }
     const handleDelete = async () => {
         try {
-            const response = await fetch(
-                "http://localhost:5000/conspiracies",
-                {
+            const response = await fetch("http://localhost:5000/conspiracies", {
                 method: "DELETE",
-                headers: {
-                    
-                },
-                body: JSON.stringify({
-                   
-                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete conspiracy')
             }
-    );
 
-    const data = await response.json();
-    setName("");
-    await onConspiracyCreated();
-    console.log(data);
-
-    } catch (error) { 
-    console.error(error);
+            setName("");
+            await onConspiracyCreated();
+        } catch (error) { 
+            console.error(error);
+        }
     }
-}
+    const handleGenerate = async () => {
+        try {
+            const response = await fetch("http://localhost:5000/conspiracies/generate", {
+                method: "POST",
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to generate conspiracy')
+            }
+
+            setName("");
+            await onConspiracyCreated();
+        } catch (error) { 
+            console.error(error);
+        }
+    }
 
   return (
     <div>
@@ -62,6 +73,7 @@ function CreateConspiracyForm({ onConspiracyCreated }) {
         <br />
       <button onClick={handleSubmit}>פרסם</button>
       <button onClick={handleDelete}>מחק קונספירציה</button>
+      <button onClick={handleGenerate}>צור קונספירציה אוטומטית</button>
     </div>
   );
 }

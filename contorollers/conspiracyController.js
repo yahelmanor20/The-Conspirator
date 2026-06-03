@@ -138,8 +138,10 @@ const deleteConspiracy = async(req, res)=>{
 }
 const deletePopConspiracies = async(req, res)=>{
     try {
-        const conspiracy = await Conspiracy.findOne({__v:0});
-        await conspiracy.deleteOne();
+        const conspiracy = await Conspiracy.findOneAndDelete({}, {sort: {createAT: -1}});
+        if (!conspiracy) {
+            return res.status(404).json({message: 'No conspiracy found to delete'})
+        }
         res.json({message: `${conspiracy.text} Conspiracy Deleted`})
     } catch (error) {
         res.status(500).json({message: error.message})
