@@ -36,8 +36,8 @@ function ConspiracyCard({ conspiracy , onConspiracyUpdated}) {
     <div className="conspiracy-card">
       <h3>{conspiracy.text}</h3>
 
-      <p>
-        <button onClick={handleLike}>👍 {conspiracy.likes}</button> | <button onClick={handleDislike}>👎 {conspiracy.disLikes}</button>
+      <p className="actions">
+        <button onClick={handleLike} >👍 {conspiracy.likes}</button> | <button onClick={handleDislike}>👎 {conspiracy.disLikes}</button>
       </p>
       <button onClick={() => setShowComments(!showComments)}>
         {showComments? "הסתר תגובות": `הצג תגובות (${conspiracy.comments.length})`}

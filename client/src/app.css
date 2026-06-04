@@ -1,12 +1,51 @@
 body {
     margin: 0;
-    font-family: David, sans-serif;
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f4f6f8;
+
     direction: rtl;
-    background-color: #f5f5f5;
 }
 
 .app {
     max-width: 900px;
     margin: auto;
-    padding: 20px;
+    padding: 30px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+.primary-btn {
+    background: #1e88e5;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+}
+.primary-btn:hover {
+    opacity: 0.9;
 }

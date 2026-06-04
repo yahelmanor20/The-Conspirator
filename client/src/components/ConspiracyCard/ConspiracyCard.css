@@ -1,10 +1,40 @@
 .conspiracy-card {
     background: white;
+
     border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 16px;
-    
+
+    padding: 20px;
+
+    margin-bottom: 20px;
 
     box-shadow:
-      0 2px 8px rgba(0,0,0,0.1);
+      0 2px 8px rgba(0,0,0,0.08);
+
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    margin-bottom: 20px;
+}
+.conspiracy-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 10px 20px rgba(0,0,0,0.15);
+}
+
+.actions button {
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    margin-left: 10px;
+
+    transition: 0.2s;
+}
+.actions button:hover {
+    transform: scale(1.05);
 }

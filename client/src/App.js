@@ -29,8 +29,14 @@ function App() {
 
   return (
     <div className="app">
-      <button onClick={() => setShowCreateForm(!showCreateForm)}>
-        + קונספירציה חדשה
+      <header className="header">
+        <h1>הקונספירטור</h1>
+        <p>
+        תתעורר כבשים! 🐑 &#60;---- אתם
+        </p>
+      </header>
+      <button className="primary-btn" onClick={() => setShowCreateForm(!showCreateForm)}>
+        {!showCreateForm?"+ קונספירציה חדשה":"סגור"}        
       </button> 
       {
       showCreateForm && (
