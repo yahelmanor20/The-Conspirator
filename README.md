@@ -334,7 +334,7 @@ Render UI
 
 ---
 
-# Manual Conspiracy Creation
+# Conspiracy Creation
 
 ## CreateConspiracyForm
 
@@ -348,13 +348,40 @@ Features:
 Flow:
 
 ```text
-User Input
+User Input | Or ask for generate 
       ↓
-POST /conspiracies
+POST /conspiracies | add /generate if you like
       ↓
-MongoDB Save
+MongoDB Save | return genertive conspiracy without updatind the db
       ↓
 fetchConspiracies()
+      ↓
+UI Refresh
+```
+
+---
+
+# Sort Conspiracies
+
+## SortBar
+
+Features:
+
+* Handels sort use case
+* Likes button
+* Date button button
+* GET request to backend with specific sort
+* Automatic list refresh
+* Automatic button color refresh
+
+Flow:
+
+```text
+User click 
+      ↓
+get /conspiracies/sort=sortOption
+      ↓
+fetchConspiracies(sortOption)
       ↓
 UI Refresh
 ```
