@@ -1,3 +1,5 @@
+#file that here to make rest request without any UI
+
 GET http://localhost:5000/conspiracies
 
 ###

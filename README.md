@@ -43,7 +43,7 @@ cd rest_api_project
 צרו קובץ בשם `.env` בתיקיית השורש של הפרויקט עם התוכן הבא:
 
 ```env
-DATABASE_URL=mongodb://localhost:27017/conspirator
+DATABASE_URL=mongodb://localhost/conspiratordb
 PORT=5000
 ```
 
