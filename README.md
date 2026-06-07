@@ -2,7 +2,7 @@
 
 ## Overview
 
-מערכת "הקונספירטור" היא אפליקציית Full Stack המאפשרת למשתמשים ליצור, לפרסם ולנהל תיאוריות קונספירציה הומוריסטיות.
+מערכת "הקונספירטור" היא אפליקציית Full Stack המאפשרת למשתמשים ליצור, לפרסם ולנהל תיאוריות קונספירציה.
 
 ### Technologies
 
@@ -290,20 +290,6 @@ UI Refresh
 
 ---
 
-# Next Steps
-
-## High Priority
-
-1. Complete manual conspiracy creation
-2. Add automatic conspiracy generator button
-3. Implement likes
-4. Implement dislikes
-5. Implement comments
-6. Add sorting options
-7. Improve UI design
-
----
-
 # Development Notes
 
 Key architectural decisions:
@@ -314,5 +300,3 @@ Key architectural decisions:
 * Services contain reusable logic
 * React App owns global state
 * Child components remain focused and reusable
-
-This structure was chosen to keep the project maintainable, scalable, and easy to explain during the technical interview and code review.
