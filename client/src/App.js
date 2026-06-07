@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ConspiracyCard from "./components/ConspiracyCard/ConspiracyCard.js";
 import CreateConspiracyForm from "./components/CreateConspiracyForm/CreateConspiracyForm.js";
-import SortBar from "./components/sortBar.js";
+import SortBar from "./components/sortBar/sortBar.js";
 import "./app.css"
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   const [sort, onSort] = useState("date");
   const [showCreateForm, setShowCreateForm] = useState(false);
 
-  const fetchConspiracies = async (sortOption=sort) => {
+  const fetchConspiracies = async (sortOption = sort) => {
     try {
       const response = await fetch(
         `http://localhost:5000/conspiracies?sort=${sortOption}`
@@ -22,10 +22,10 @@ function App() {
      console.error(error);
     }
   };
-  
 
   useEffect(() => {
     fetchConspiracies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
