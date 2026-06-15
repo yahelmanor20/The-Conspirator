@@ -371,3 +371,6 @@ Key architectural decisions:
 * Services contain reusable logic
 * React App owns global state
 * Child components remain focused and reusable
+
+---
+

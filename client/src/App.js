@@ -3,20 +3,28 @@ import ConspiracyCard from "./components/ConspiracyCard/ConspiracyCard.js";
 import CreateConspiracyForm from "./components/CreateConspiracyForm/CreateConspiracyForm.js";
 import SortBar from "./components/sortBar/sortBar.js";
 import "./app.css"
+import env from "react-dotenv";
+
 
 function App() {
   const [conspiracies, setConspiracies] = useState([]);
   const [sort, onSort] = useState("date");
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [NumberOfConspiracys, setNumberOfConspiracys] = useState(0);
 
   const fetchConspiracies = async (sortOption = sort) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/conspiracies?sort=${sortOption}`
+        `${env.API_URL}conspiracies?sort=${sortOption}`
       );
+      const countResponse = await fetch(
+        `http://localhost:5000/conspiracies/count`
+      );
+      const countData = await countResponse.json();
       const data = await response.json();
       setConspiracies(data);
       onSort(sortOption);
+      setNumberOfConspiracys(countData);
     }
    catch (error) {
      console.error(error);
@@ -45,7 +53,7 @@ function App() {
       )}
       <br/>
 
-      <SortBar onSortUpdate={fetchConspiracies} currentSort={sort}/>
+      <SortBar onSortUpdate={fetchConspiracies} currentSort={sort} NumberOfConspiracys={NumberOfConspiracys}/>
 
       {conspiracies.map((conspiracy) => (
         <ConspiracyCard key={conspiracy._id} conspiracy={conspiracy} onConspiracyUpdated={fetchConspiracies} />

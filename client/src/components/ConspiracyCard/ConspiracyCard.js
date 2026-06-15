@@ -34,6 +34,7 @@ function ConspiracyCard({ conspiracy , onConspiracyUpdated}) {
   }
   return (
     <div className="conspiracy-card">
+      <h6 className="conspiracy-card__category">[ {conspiracy.category} ]</h6>  
       <h3>{conspiracy.text}</h3>
 
       <p className="actions">

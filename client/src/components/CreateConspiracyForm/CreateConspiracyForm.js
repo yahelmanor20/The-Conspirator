@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./CreateConspiracyForm.css"
 function CreateConspiracyForm({ onConspiracyCreated }) {
     const [name, setName] = useState("");
+    const [category, setCategory] = useState("");
     const handleSubmit = async () => {
       try {
         if (!name.trim()) {
@@ -17,17 +18,21 @@ function CreateConspiracyForm({ onConspiracyCreated }) {
             },
             body: JSON.stringify({
             text: name,
+            category: category,
             }),
         }
         );
-
         const data = await response.json();
+
+          if (!response.ok) {
+          throw(data);
+        }
         setName("");
         await onConspiracyCreated();
         console.log(data);
         
       } catch (error) { 
-        console.error(error);
+      alert(error);
     }
     }
     const handleDelete = async () => {
@@ -72,6 +77,19 @@ function CreateConspiracyForm({ onConspiracyCreated }) {
         className="conspiracy-textarea"
       />
         <br />
+        <select 
+        id="cars" 
+        value={category}
+         onChange={(e) => setCategory(e.target.value)}
+         className="conspiracy-textarea">
+          <option value="">--Please choose an option--</option>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="opel">Opel</option>
+          <option value="audi">Audi</option>
+        </select>
+      <br></br>
+      <br></br>
       <div className="actionsSubmit">
         <button onClick={handleSubmit}>פרסם</button>
         <button onClick={handleDelete}>מחק קונספירציה</button>

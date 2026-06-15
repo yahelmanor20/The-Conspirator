@@ -25,7 +25,10 @@ const getAllConspiracies = async (req, res) => {
             query = query.sort({ createAT : 1 });
         } else if (req.query.sort === 'likes') {
             query = query.sort({ likes: -1 });
+        } else if (req.query.sort === 'comments') {
+            query = query.sort({ comments: -1});
         }
+
 
         const conspiracys = await query;
         res.json(conspiracys);
@@ -42,11 +45,25 @@ const getConspiracyById = async(req, res)=>{
         res.status(400).json({message:error.message})
     }
 }
+const getAllCount = async (req, res) => {
+    try {
+        let conspiracys =  await Conspiracy.countDocuments();
+        res.json(conspiracys);
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({message: error.message})
+    }
+} 
 const createNewConspiracy = async(req, res)=>{
+  if (req.body.text.length < 10) {
+      res.status(400).json("Conspiracy is under 10 letters!")
+      return;
+  }
     const conspiracy  = new Conspiracy({
     text: req.body.text,
     likes: req.body.likes ?? 0,
-    disLikes: req.body.disLikes ?? 0
+    disLikes: req.body.disLikes ?? 0,
+    category: req.body.category,
     });
     try {
         const newConspiracy = await conspiracy.save();
@@ -157,5 +174,6 @@ module.exports = {getConspiracy,
                 disLikeConspiracy,
                 addComment,
                 generateConspiracyController,
-                deletePopConspiracies
+                deletePopConspiracies,
+                getAllCount
 };

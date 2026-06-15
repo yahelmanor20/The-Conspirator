@@ -5,8 +5,14 @@ const Contoroller = require('../contorollers/conspiracyController')
 
 //get all
 router.get('/', Contoroller.getAllConspiracies);
+
+//get count
+router.get('/count', Contoroller.getAllCount);
+
 //get one by id
 router.get('/:id', Contoroller.getConspiracy, Contoroller.getConspiracyById);
+
+
 
 //create one
 router.post('/', Contoroller.createNewConspiracy);

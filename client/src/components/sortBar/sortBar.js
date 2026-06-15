@@ -1,6 +1,7 @@
 import "./sortBar.css";
+function SortBar({onSortUpdate, currentSort, NumberOfConspiracys}) {
 
-function SortBar({onSortUpdate, currentSort}) {
+
     const handleSortByLikes = async ()=>{
         onSortUpdate("likes")
         return;
@@ -21,6 +22,8 @@ function SortBar({onSortUpdate, currentSort}) {
                 className={"sort-bar__btn" + (currentSort === "date" ? " sort-bar__btn--active" : "")}
                 onClick={handleSortByCreationTime}>מהישן לחדש</button>
         </div>
+        <h3 className="sort-bar__title">מס' קונספירציות:</h3>
+        <span className="sort-bar__number-conspiracys">{NumberOfConspiracys}</span>
         </div>
     );
 }

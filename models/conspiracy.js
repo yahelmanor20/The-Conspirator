@@ -19,6 +19,10 @@ const conspiracySchema = new mongoose.Schema({
         type: Number,
         default : 0,
     },
+    category: {
+        type: String,
+        defualt:"None"
+    },
     comments:[
         {
             author: String,
