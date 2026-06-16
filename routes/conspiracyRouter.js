@@ -24,6 +24,9 @@ router.post("/generate", Contoroller.generateConspiracyController);
 //update one
 router.patch('/:id',Contoroller.getConspiracy, Contoroller.updateConspiracy);
 
+//update likes
+router.patch('/:id/updateLikesOrDiss',Contoroller.getConspiracy, Contoroller.updateLikesOrDiss);
+
 //delete one not by id
 router.delete('/', Contoroller.deletePopConspiracies);
 

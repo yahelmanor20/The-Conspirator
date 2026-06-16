@@ -144,6 +144,21 @@ const deletePopConspiracies = async(req, res)=>{
     }
 
 }
+const updateLikesOrDiss = async(req, res) =>{
+  if (req.body.likes != null) {
+    res.conspiracy.likes = req.body.likes
+  }
+  if (req.body.disLikes != null) {
+  res.conspiracy.disLikes = req.body.disLikes
+  }
+  
+  try {
+    const updatedConspiracy = await res.conspiracy.save();
+    res.json(updatedConspiracy)
+  } catch (error) {
+    res.status(400).json({message:error.message})
+  }
+}
 
 module.exports = {getConspiracy, 
                 getAllConspiracies,
@@ -155,5 +170,6 @@ module.exports = {getConspiracy,
                 disLikeConspiracy,
                 addComment,
                 generateConspiracyController,
-                deletePopConspiracies
+                deletePopConspiracies,
+                updateLikesOrDiss
 };
